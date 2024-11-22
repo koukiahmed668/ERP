@@ -1,0 +1,60 @@
+
+using ERP.microservices.inventory.interfaces;
+using ERP.microservices.inventory.repositories;
+using ERP.microservices.inventory.services;
+using ERP.infrastructure.data;
+using System;
+using Microsoft.EntityFrameworkCore;
+using ERP.api.inventory.dtos;
+using MySql.EntityFrameworkCore;
+
+namespace ERP
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            // Add AutoMapper
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+            // Add DbContext and repository
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseMySQL(connectionString)); // No need for MySqlServerVersion
+
+
+            // Register the repository and service
+            builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
+            builder.Services.AddScoped<IInventoryService, InventoryService>();
+
+            // Add other services (JWT, Redis, Kafka, etc.)
+          
+
+            // Add services to the container.
+
+            builder.Services.AddControllers();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
+            var app = builder.Build();
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+            app.UseHttpsRedirection();
+
+            app.UseAuthorization();
+
+
+            app.MapControllers();
+
+            app.Run();
+        }
+    }
+}
