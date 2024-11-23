@@ -8,23 +8,21 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="StackExchange.Redis" Version="2.8.16" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.2.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="api\hr\" />
-    <Folder Include="api\auth\" />
-    <Folder Include="api\config\" />
-    <Folder Include="api\inventory\extensions\" />
     <Folder Include="api\sales\" />
-    <Folder Include="infrastructure\messaging\" />
-    <Folder Include="infrastructure\cache\" />
     <Folder Include="infrastructure\config\" />
     <Folder Include="microservices\hr\repositories\" />
     <Folder Include="microservices\hr\services\" />

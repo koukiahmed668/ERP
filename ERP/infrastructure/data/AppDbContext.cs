@@ -1,4 +1,5 @@
 ﻿using ERP.models.inventory;
+using ERP.models.user;
 using Microsoft.EntityFrameworkCore;
 
 namespace ERP.infrastructure.data
@@ -6,7 +7,7 @@ namespace ERP.infrastructure.data
     public class AppDbContext : DbContext
     {
         public DbSet<InventoryItem> InventoryItems { get; set; }
-        // Add other DbSets for different entities (e.g., Sales, HR, etc.)
+        public DbSet<User> Users { get; set; } // Add DbSet for User entity
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options) { }
@@ -15,10 +16,15 @@ namespace ERP.infrastructure.data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configure relationships, indexes, or other EF Core-specific configurations here
+            // Configure InventoryItem entity
             modelBuilder.Entity<InventoryItem>()
-                .HasIndex(i => i.Name) // Example of creating an index on the Name column
+                .HasIndex(i => i.Name)
                 .IsUnique();
+
+            // Configure User entity
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Username)
+                .IsUnique(); // Enforce unique usernames
         }
     }
 }

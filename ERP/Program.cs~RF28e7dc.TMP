@@ -13,9 +13,6 @@ using System.Text.Json.Serialization;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using ERP.microservices.user.interfaces;
-using ERP.microservices.user.services;
-using ERP.infrastructure.RateLimit;
 
 namespace ERP
 {
@@ -38,11 +35,6 @@ namespace ERP
             // Register the repository and service
             builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
             builder.Services.AddScoped<IInventoryService, InventoryService>();
-
-            builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-            builder.Services.AddScoped<IRateLimitService, RateLimitService>();
 
             // Add Redis configuration
             var redisConnectionString = builder.Configuration.GetSection("Redis:ConnectionString").Value;
