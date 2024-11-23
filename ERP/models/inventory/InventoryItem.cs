@@ -9,6 +9,7 @@ namespace ERP.models.inventory
         public int Price { get; set; }
         public decimal Quantity { get; set; }
         public InventoryStatus Status { get; set; }
+        public int LowStockThreshold { get; set; } 
 
     }
 }

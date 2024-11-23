@@ -2,6 +2,7 @@
 using ERP.infrastructure.cache;
 using ERP.microservices.inventory.interfaces;
 using ERP.models.inventory;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -21,7 +22,6 @@ namespace ERP.api.inventory.controllers
             _inventoryService = inventoryService;
             _cacheService = cacheService;
         }
-
         [HttpGet]
         public async Task<IActionResult> GetAllItems()
         {

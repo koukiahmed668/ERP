@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using ERP.microservices.user.interfaces;
 using ERP.microservices.user.services;
 using ERP.infrastructure.RateLimit;
+using ERP.infrastructure.Mail;
 
 namespace ERP
 {
@@ -43,6 +44,9 @@ namespace ERP
             builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             builder.Services.AddScoped<IRateLimitService, RateLimitService>();
+
+            builder.Services.AddSingleton<IEmailService, EmailService>();
+
 
             // Add Redis configuration
             var redisConnectionString = builder.Configuration.GetSection("Redis:ConnectionString").Value;
@@ -93,7 +97,7 @@ namespace ERP
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
+            app.UseAuthentication();
 
             app.MapControllers();
 
