@@ -17,6 +17,9 @@ using ERP.microservices.user.interfaces;
 using ERP.microservices.user.services;
 using ERP.infrastructure.RateLimit;
 using ERP.infrastructure.Mail;
+using ERP.microservices.sales.interfaces;
+using ERP.microservices.sales.repositories;
+using ERP.microservices.sales.services;
 
 namespace ERP
 {
@@ -46,6 +49,10 @@ namespace ERP
             builder.Services.AddScoped<IRateLimitService, RateLimitService>();
 
             builder.Services.AddSingleton<IEmailService, EmailService>();
+
+            builder.Services.AddScoped<ISaleService, SaleService>();
+            builder.Services.AddScoped<ISaleRepository, SaleRepository>();
+
 
 
             // Add Redis configuration

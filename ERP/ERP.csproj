@@ -22,14 +22,10 @@
 
   <ItemGroup>
     <Folder Include="api\hr\" />
-    <Folder Include="api\sales\" />
     <Folder Include="infrastructure\config\" />
     <Folder Include="microservices\hr\repositories\" />
     <Folder Include="microservices\hr\services\" />
-    <Folder Include="microservices\sales\repositories\" />
-    <Folder Include="microservices\sales\services\" />
     <Folder Include="models\hr\" />
-    <Folder Include="models\sales\" />
   </ItemGroup>
 
 </Project>

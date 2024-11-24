@@ -6,8 +6,11 @@ namespace ERP.microservices.inventory.interfaces
     {
         Task<IEnumerable<InventoryItem>> GetAllAsync();
         Task<InventoryItem> GetByIdAsync(Guid id);
+        IQueryable<InventoryItem> GetByIdQuery(Guid id); 
         Task AddAsync(InventoryItem item);
         Task UpdateAsync(InventoryItem item);
         Task DeleteAsync(Guid id);
+
     }
 }
+    

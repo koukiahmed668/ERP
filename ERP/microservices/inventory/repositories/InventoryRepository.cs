@@ -21,9 +21,16 @@ namespace ERP.microservices.inventory.repositories
             return await _context.InventoryItems.ToListAsync();
         }
 
+        // This method returns IQueryable so you can apply AsNoTracking if needed
+        public IQueryable<InventoryItem> GetByIdQuery(Guid id)
+        {
+            return _context.InventoryItems.Where(x => x.Id == id);  // Returns IQueryable
+        }
+
+        // GetByIdAsync now uses the queryable and AsNoTracking in the service
         public async Task<InventoryItem> GetByIdAsync(Guid id)
         {
-            return await _context.InventoryItems.FindAsync(id);
+            return await _context.InventoryItems.FindAsync(id); // Using FindAsync for a single entity
         }
 
         public async Task AddAsync(InventoryItem item)

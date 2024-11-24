@@ -54,18 +54,11 @@ namespace ERP.microservices.inventory.services
         public async Task UpdateItemAsync(InventoryItemDto itemDto)
         {
             var item = _mapper.Map<InventoryItem>(itemDto);
-            await _inventoryRepository.UpdateAsync(item);
 
-            // Check for low stock
-            if (item.Quantity <= item.LowStockThreshold)
-            {
-                await _emailService.SendEmailAsync(
-                    "koukiahmed668@gmail.com",
-                    "Low Stock Alert",
-                    $"Item '{item.Name}' is running low with only {item.Quantity} left in stock."
-                );
-            }
+            // Simply update the item and let EF handle the state management
+            _inventoryRepository.UpdateAsync(item);
         }
+
 
         // Delete an inventory item
         public async Task DeleteItemAsync(Guid id)
